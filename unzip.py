@@ -29,12 +29,16 @@ def extract(filename):
             else:
                 name = n.filename.decode("gb2312")
 
-            print("name:%s" % name )
             path = os.path.join(root_name,name)
+            print("path:%s" % path )
             if n.file_size == 0:
                 if not os.path.exists(path):
                     os.makedirs(path)
                 continue
+
+            dirname = os.path.dirname(path)
+            if not os.path.exists(dirname):
+                os.makedirs(dirname)
 
             f = open(path,"w+")
             f.write(zf.read(n.filename))
